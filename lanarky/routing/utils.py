@@ -1,5 +1,5 @@
 from functools import lru_cache
-from typing import Type
+from typing import Callable, Type
 
 from fastapi import Depends, WebSocket, params
 from langchain.chains.base import Chain
@@ -25,16 +25,16 @@ CHAT_HISTORY_KEY = "chat_history"
 SOURCE_DOCUMENTS_KEY = "source_documents"
 
 
-def create_langchain_dependency(langchain_object: Type[Chain]) -> params.Depends:
-    """Creates a langchain object dependency.
+def create_dependency(object: Callable, maxsize: int = 1) -> params.Depends:
+    """Creates an object dependency.
 
     Args:
-        langchain_object: The langchain object.
+        object: a callable object.
     """
 
-    @lru_cache(maxsize=1)
-    def dependency() -> Chain:
-        return langchain_object
+    @lru_cache(maxsize=maxsize)
+    def dependency() -> Callable:
+        return object
 
     return Depends(dependency)
 
