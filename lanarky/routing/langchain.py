@@ -4,9 +4,9 @@ from fastapi.routing import APIRouter
 from fastapi.websockets import WebSocket
 from langchain.chains.base import Chain
 
+from lanarky.schemas import LLMCacheMode, StreamingMode
+
 from .utils import (
-    LLMCacheMode,
-    StreamingMode,
     create_langchain_dependency,
     create_langchain_endpoint,
     create_langchain_websocket_endpoint,

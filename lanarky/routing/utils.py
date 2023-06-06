@@ -1,4 +1,3 @@
-from enum import IntEnum
 from functools import lru_cache
 from typing import Type
 
@@ -8,25 +7,8 @@ from langchain.schema import Document
 from pydantic import BaseModel, create_model
 
 from lanarky.responses import StreamingResponse
+from lanarky.schemas import StreamingMode
 from lanarky.websockets import WebsocketConnection
-
-
-class StreamingMode(IntEnum):
-    """Streaming modes for LangchainRouter."""
-
-    OFF = 0
-    TEXT = 1
-    JSON = 2
-
-
-class LLMCacheMode(IntEnum):
-    """LLM cache modes for LangchainRouter."""
-
-    OFF = 0
-    IN_MEMORY = 1
-    REDIS = 2
-    GPTCACHE = 3
-
 
 BASE_LANGCHAIN_TYPES = [
     "ConversationChain",
